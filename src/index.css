@@ -1,0 +1,59 @@
+#container{
+ 
+}
+
+h1{
+  text-align: center;
+  font-size: 2.3em;
+}
+
+#top_part{
+  display: flex;
+}
+
+#button{
+  text-align: center;
+  display: inline-block;
+}
+
+button{
+  margin-right: 20px;
+  font-size: 2.5rem;
+  padding: 15px;
+  border-radius: 40px;
+  background-color: rgb(9, 255, 9);
+  color: white;
+  font-weight: bold;
+}
+
+#players_cards{
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+  border: 1px solid black;
+  text-align:center;
+  margin-top: 50px;
+  flex-wrap: wrap;
+}
+
+#card{
+  font-size: 10rem;
+  padding-inline: 23.74px;
+  margin-inline: 10px;
+  border: 1px solid black;
+  border-radius: 11px;
+  margin-bottom: 5px;
+  color: white;
+  padding-block: 17px;
+  
+}
+
+#cards{
+  display: inline-block;
+  border: 1px solid black;
+  height: 200px;
+  width: 120px;
+  margin: 5px;
+  
+
+}
