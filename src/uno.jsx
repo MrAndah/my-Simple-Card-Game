@@ -155,13 +155,16 @@ function Uno (){
           );
         
       setChoice(updatedChoice);
+      document.getElementById("card").style.paddingBlock="17hitpx";
+      document.getElementById("card").style.paddingInline="23.74px";
 
-      
+
     }
     else{
       console.log("its not part");
-      setChoice([...choice,x]);
-      document.getElementById("card").style.drop
+      setChoice([...choice,x]);  
+      document.getElementById("card").style.paddingBlock="23px";
+      document.getElementById("card").style.paddingInline="27px"; 
 
     }
   }
@@ -191,13 +194,16 @@ function submit() {
       uno_charge();
     }
 
-    setChoice([]);
+    
 
     // Add a delay before the computer's turn
     setTimeout(() => {
       comp_turn();
     }, 1000);
   }
+  setCards([...cards , choice])
+  setChoice([]);
+
   console.log(cards)
 }
 
@@ -217,8 +223,8 @@ function submit() {
 
     const updatedCards = cards.filter(
       (card) =>
-        !ccards.some((c) => c.number === card.number && c.color === card.color) &&
-        !pcards.some((p) => p.number === card.number && p.color === card.color)
+        !ccards.some((c) => c.number === card.number && c.color === card.color && c.type === card.type) &&
+        !pcards.some((p) => p.number === card.number && p.color === card.color && p.type === card.type)
     );
 
     setCards(updatedCards);
@@ -244,8 +250,8 @@ function submit() {
 
     const updatedCards = cards.filter(
       (card) =>
-        !ccards.some((c) => c.number === card.number && c.color === card.color) &&
-        !pcards.some((p) => p.number === card.number && p.color === card.color)
+        !ccards.some((c) => c.number === card.number && c.color === card.color && c.type === card.type) &&
+        !pcards.some((p) => p.number === card.number && p.color === card.color && p.type === card.type)
     );
 
     setCards(updatedCards);
@@ -280,7 +286,9 @@ function submit() {
   
       // Remove the chosen card from computer's hand
       let compCards = ccards.filter(
-        (card) => !(card.number === chosenCard.number && card.color === chosenCard.color)
+        (card) => !(card.number === chosenCard.number &&
+                     card.color === chosenCard.color &&
+                     card.type === chosenCard.type)
       );
       setCcards([...compCards, current]);
     } else {
@@ -319,7 +327,7 @@ function submit() {
         <button onClick={start} id="start"> start</button>
         <button onClick={submit}> Submit</button>
         {current.map((current , index) => 
-        <span key={index} id="card" style={{backgroundColor:current.color}}> {current.number} </span>
+        <span key={index} id="cardz" style={{backgroundColor:current.color}}> {current.number} </span>
         )}
         <span id="cards" color="black" onClick={draw_card}> Draw Card</span>
       </div>
