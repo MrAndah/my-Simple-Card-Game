@@ -9,6 +9,9 @@ h1{
 
 #top_part{
   display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
 }
 
 #button{
@@ -31,29 +34,62 @@ button{
   align-items: flex-end; 
   justify-content: center;
   border: 1px solid black;
-  text-align:center;
   margin-top: 50px;
   flex-wrap: wrap;
+  height: 350px;
 }
 
 #card{
   font-size: 10rem;
   padding-inline: 23.74px;
   margin-inline: 10px;
-  border: 1px solid black;
+  border: 2px solid black;
   border-radius: 11px;
   margin-bottom: 5px;
   color: white;
   padding-block: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: fadeIn 1s ease-in-out forwards; 
   
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start hidden */
+  }
+  to {
+    opacity: 1; /* Fully visible */
+  }
+}
+
 #cards{
-  display: inline-block;
-  border: 1px solid black;
-  height: 200px;
-  width: 120px;
-  margin: 5px;
+  display: flex;
+  border: 2px solid black;
+  height: 215px;
+  width: 130px;
+  margin-left: 10px;
+  border-radius: 11px;
+  font-size: 3.3em;
+  align-items: center;
+  justify-content: center;
+  font-weight:bold;
+  cursor: pointer;
+}
+
+#cardz{
+  font-size: 10rem;
+  padding-inline: 23.74px;
+  margin-inline: 10px;
+  border: 2px solid black;
+  border-radius: 11px;
+  margin-bottom: 5px;
+  color: white;
+  padding-block: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: fadeIn 1s ease-in-out forwards; 
+  
   
 
 }
