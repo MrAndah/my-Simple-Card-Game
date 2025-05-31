@@ -77,6 +77,21 @@ button{
   cursor: pointer;
 }
 
+#sel-card{
+  font-size: 10rem;
+  padding-inline: 23.74px;
+  margin-inline: 10px;
+  border: 2px solid black;
+  border-radius: 11px;
+  margin-bottom: 5px;
+  color: white;
+  padding-block: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  animation: fadeIn 1s ease-in-out forwards;
+
+}
+
 #cardz{
   font-size: 10rem;
   padding-inline: 23.74px;
@@ -92,4 +107,8 @@ button{
   
   
 
+}
+
+button{
+  cursor: pointer;
 }

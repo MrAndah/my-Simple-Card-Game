@@ -4,7 +4,11 @@ import { useState , useEffect } from "react"
 
 function Uno (){
 
-  const[ cards , setCards]=useState( [
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    
+
+    const[ cards , setCards]=useState( [
         // Red cards
         { number: 0, type: "normal", color: "red" },
         { number: 1, type: "normal2", color: "red" },
@@ -93,8 +97,8 @@ function Uno (){
 
 
     // These are variable I'll use
-  const [pcards , setPcards] = useState([]);
-  const [ccards , setCcards] = useState([]);
+  const [pcards , setPcards] = useState([]); // This is the list of player's cards
+  const [ccards , setCcards] = useState([]); // This is the list of computer's cards
   const [current , setCurrent] = useState([]);  // This is for the last card
   const [choice , setChoice] = useState([]);   // For the cards the players select 
   const [compchoice , setCompchoice] = useState([]); // For computers choice
@@ -123,18 +127,13 @@ function Uno (){
     document.getElementById("start").style.display = "none";
   }
 
-  useEffect(() => {
-    console.log("Updated cards (remaining deck):", cards);
-    console.log("Player cards (pcards):", pcards);
-    console.log("Computer cards (ccards):", ccards);
-    console.log("Current card:", current);
-  }, [cards, pcards, ccards, current]); // Dependency array to log after state changes
+  // Dependency array to log after state changes
 
   // Selecting a card
   
   // This is the select Function
   
-  function select (x){ // please dont question why i used x as a variable
+  function select (x , index , e){ // please dont question why i used x as a variable
     if(choice.some(
       (chosenCard) => // this is to check if the selected card is part of the players choice
         chosenCard.number === x.number && 
@@ -142,10 +141,10 @@ function Uno (){
         chosenCard.type === x.type 
         ))
      {
-        console.log("it is part");
-        console.log(current);
-          // This is to remove the selected card in case it was part  
-          const updatedChoice = choice.filter(
+         console.log("it is part");
+         console.log(current);
+          // This is to remove the selected card in case it was part
+         const updatedChoice = choice.filter(
             (choiceCard) =>
               !(
                 choiceCard.number === x.number &&
@@ -154,17 +153,21 @@ function Uno (){
               )
           );
         
-      setChoice(updatedChoice);
-      document.getElementById("card").style.paddingBlock="17hitpx";
-      document.getElementById("card").style.paddingInline="23.74px";
+        setChoice(updatedChoice);
 
+      //   setSelectedItems((prev) =>
+      //     prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      // );
 
+         e.target.style.color="black";
+         e.target.style.paddingInline="23.74px";
     }
     else{
       console.log("its not part");
-      setChoice([...choice,x]);  
-      document.getElementById("card").style.paddingBlock="23px";
-      document.getElementById("card").style.paddingInline="27px"; 
+      setChoice([...choice,x]);
+
+        e.target.style.color="black";
+        e.target.style.paddingInline="23.74px";
 
     }
   }
@@ -229,6 +232,7 @@ function submit() {
 
     setCards(updatedCards);
     
+    
   }
 
   // This is the draw card function
@@ -237,33 +241,33 @@ function submit() {
     const playerCards = cards[0];
 
     setPcards((prevCards) => [...prevCards, playerCards]);
-
-    console.log(choice)
-    console.log(current.number)
-    console.log(current.color)
- 
-    if(playerCards.color !== current.color && playerCards.number !== current.number){
-      window.alert("No cards left to play its the compuetrs turn");
-      comp_turn()
-    }
-
-
-    const updatedCards = cards.filter(
-      (card) =>
-        !ccards.some((c) => c.number === card.number && c.color === card.color && c.type === card.type) &&
-        !pcards.some((p) => p.number === card.number && p.color === card.color && p.type === card.type)
-    );
-
-    setCards(updatedCards);
     
 
-    if(playerCards.color !== current.color && playerCards.number !== current.number){
-      window.alert("No cards left to play its the compuetrs turn");
-      comp_turn()
+    console.log(choice)
+    console.log(playerCards)
+    console.log(current.color)
+ 
+
+
+
+    setCards(prevCards => prevCards.slice(1));
+
+
+    if (playerCards.color === current[0].color || playerCards.number === current[0].number) {
+      // Player can choose to play this card
+      window.alert(`You drew a playable card: ${playerCards.color} ${playerCards.number}`);
+    } else {
+      // If not playable, computer's turn
+      setTimeout(() => {
+        window.alert("No cards left to play - it's the computer's turn");
+        comp_turn();
+      }, 1000);
     }
 
     console.log(cards)
   }
+
+
 
   //This is Computers Turn Function
 
@@ -333,9 +337,11 @@ function submit() {
       </div>
       <div id="players_cards">
         {pcards.map(( Cards , index) =>
-          <span id="card" key={index} 
-              style={{backgroundColor:Cards.color}} 
-              onClick={() => select(Cards)}> 
+          <span id='card'
+                key={index}
+                className={'item'}
+                style={{backgroundColor:Cards.color}}
+                onClick={() => select(Cards , index, )}>
           {Cards.number} 
           </span>
         )}
